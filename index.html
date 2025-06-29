@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="ja">
+
+  <head>
+    <script type="text/x-mathjax-config">
+
+       MathJax.Hub.Config({TeX:{equationNumbers:{autoNumber:"AMS"}}});
+
+    </script>
+
+    <script type="text/javascript" async 
+
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+
+    </script>
+
+  </head>
+
+  <body>
+    <h3>モデル規範適応制御の数値解析(数値実験)</h3>
+
+    <p><a href="https://aoyamakohbo.github.io/AdaptCont/">超安定論によるモデル規範適応制御</a>
+      を数値解析で確かめます。
+    </p>
+
+    \begin{align}
+    \ddot x + \eta K_D \dot x + \eta K_P(x - u) = 0 \label{eq:SysEqn}
+    \end{align}
+
+     <p> ここに、\(x\)は位置、\(K_D\)は微分ゲイン、\(K_P\)は比例ゲイン、\(u\)は位置入力、\(\eta(>0)\)は駆動効率係数です。
+      目的とする制御性能を規範モデルとして次式で与えます。
+     </p> 
+
+    \begin{align}
+    \ddot x_M + a\dot x_M + b(x_M - u)= 0 \label{eq:MdlEqn}
+    \end{align}
+
+    <p> ここに、\(x_M\)は規範モデルの位置です。係数\(a > 0\)、\(b > 0\)とします。</p>
+    <p>微分ゲイン\(K_D\)と比例ゲイン\(K_P\)を次式で調整します。</p>
+
+    \begin{align}
+    K_D = \frac{a}{\hat\eta},~~~~K_P = \frac{b}{\hat\eta}. \label{eq:ModEta}
+    \end{align}
+
+  <p>ここに、\(\hat\eta\)は駆動効率\(\eta\)の推定値です。
+      式\eqref{eq:ModEta}の\(\hat\eta\)を<a href="https://aoyamakohbo.github.io/AdaptCont/">超安定論によるモデル規範適応制御</a>
+      で導出した適応制御則に従って調整します。
+  </p>
+
+  <p>適応制御則：</p>
+  \begin{align}
+   \dot{\hat{\eta}} = \alpha \frac{\{a \dot x + b (x - u)\}\varepsilon}{\hat\eta}\label{eq:AdaptRule}
+  \end{align}
+
+  \begin{align}
+    \varepsilon = e + c\dot e,~~~e = x_M - x. \label{eq:ExdEqn}
+  \end{align}
+
+  <p>強誠実条件：</p>
+  \begin{align}
+   c > \frac{1}{a} \label{eq:STR_Cond}
+  \end{align}
+
+  <p>\(\omega_n=6.28×10\)[rad/s]、\(\zeta=0.2\)とすると、\(a=25.12\)、\(b=3943\)です。</p>
+  
+  <p>強誠実条件：</p>
+  \begin{align}
+   c = \frac{2}{25.12} \fallingdotseq 0.08 \label{eq:Set_C}
+  \end{align}
+
+  <p>\(\eta=0.5.2.0,3.0\)について\(\eta/\hat\eta\)の動作を<a href="https://aoyamakohbo.github.io/EulerMtd/">オイラー法による逐次数値積分</a> による数値シミュレーションで観察します。</p>
+  <p>オイラー法の時間刻み\(\varDelta t = 0.0001\)[s]として、\(T=0.005\)[s]でサンプルします。</p>
+
+   <p><a href="https://aoyamakohbo.github.io/Craftlogy/">->TOP</a></p>
+</body>
+
+</html>
