@@ -21,7 +21,7 @@
     <h3>モデル規範適応制御の数値解析(数値実験)</h3>
 
     <p><a href="https://aoyamakohbo.github.io/AdaptCont/">超安定論によるモデル規範適応制御</a>
-      を数値解析で確かめます。
+      を数値解析で確認します。
     </p>
 
     \begin{align}
@@ -62,7 +62,7 @@
    c > \frac{1}{a} \label{eq:STR_Cond}
   \end{align}
 
-  <p>\(\omega_n=6.28×10\)[rad/s]、\(\zeta=0.2\)とすると、\(a=25.12\)、\(b=3943\)です。</p>
+  <p>\(\omega_n=6.28\times 10\)[rad/s]、\(\zeta=0.2\)とすると、\(a=25.12\)、\(b=3943\)です。</p>
   
   <p>強誠実条件：</p>
   \begin{align}
@@ -70,7 +70,79 @@
   \end{align}
 
   <p>\(\eta=0.5.2.0,3.0\)について\(\eta/\hat\eta\)の動作を<a href="https://aoyamakohbo.github.io/EulerMtd/">オイラー法による逐次数値積分</a> による数値シミュレーションで観察します。</p>
-  <p>オイラー法の時間刻み\(\varDelta t = 0.0001\)[s]として、\(T=0.005\)[s]でサンプルします。</p>
+  <p>オイラー法の時間刻み\(\varDelta t = 0.0001\)[s]として計算します。</p>
+
+    \begin{align}
+    \ddot x(k) = - \eta K_D \dot x(k) - \eta K_P(x(k) - u(k)) = 0 \label{eq:ddx}
+    \end{align}
+
+    </p>
+    \begin{align}
+     v(k+1) &=~ v(k)+\ddot x(k)\varDelta t\\
+     x(k+1) &=~ x(k) + v(k)\varDelta t + \frac{1}{2}\ddot x(k)\varDelta t^2
+    \end{align}
+
+  <p>規範モデル\eqref{eq:MdlEqn}はサンプル時間\(T=0.005\)[s]として、<a href="https://aoyamakohbo.github.io/VscElsVib1D/">離散時間状態方程式</a>
+    で計算します。</p>
+    \begin{align}
+      \left[
+        \begin{array}{@{\,}l}
+          x_M(n+1)\\
+          \dot x_M(n+1)
+        \end{array}
+      \right]
+      =
+      \left[
+        \begin{array}{@{\,}cc}
+          0.9531&0.004222\\
+          -18.23&0.8370
+        \end{array}
+      \right]
+      \left[
+        \begin{array}{@{\,}l}
+          x_M(n)\\
+          \dot x_M(n)
+        \end{array}
+      \right]
+      +
+      \left[
+      \begin{array}{@{\,}c}
+        -0.04691\\
+        18.23
+      \end{array}
+    \right]u(n),~~~
+      y_M(n)=[1~~0]
+    \left[
+      \begin{array}{@{\,}l}
+       x_M(n)\\
+       \dot x_M(n)
+      \end{array}
+     \right].
+    \end{align} 
+    
+    <p>初期値\(\hat{\eta} = 1\)、\(\alpha = 1.0\times 10^{-5}\)として、
+      \(\eta = 2.0\)と\(\eta = 0.5\)の場合について
+      規範モデル\(x_M\)に対する適応制御系\(x\)の挙動を数値実験により観察します。</p>
+    <img src="AdaptCont_x_xM.jpg" width=600px>
+
+    <p>\(\eta = 2.0\)の場合、2000ステップで適応制御系\(x\)が規範モデル\(x_M\)に一致しています。</p>
+    <p>\(\eta = 0.5\)の場合、250ステップで適応制御系\(x\)が規範モデル\(x_M\)に一致しています。</p>
+
+    <p>\(\eta = 0.1,0.5,2.0,3.0.5.0,6.0\)の場合について\(\eta/\hat{\eta}\)の挙動を観察します。
+      \(\eta/\hat{\eta}=1\)に収束すれば\(\hat{\eta} = \eta\)となり、
+      適応制御成功です。
+    </p>
+    <img src="AdaptCont_eta.jpg" width=600px>
+
+    <p>\(\eta = 0.5\)の場合は、250ステップほどで\(\eta/\hat{\eta}=1\)に収束しています。</p>
+    <p>\(\eta = 2.0\)の場合は、2000ステップでほぼ\(\eta/\hat{\eta}=1\)に収束しています。</p>
+    <p>\(\eta = 3.0,5.0\)の場合は、2000ステップでまだ\(\eta/\hat{\eta}=1\)に収束していませんが、
+      収束していくことを確認できます。</p>
+    <p>\(\eta = 6.0\)の場合は、収束せずに発散しています。</p>
+    <p>\(\eta = 0.1\)の場合は、適応に失敗しています。</p>
+    <p>この数値実験では、\(\eta/\hat{\eta} < 1\)の場合の方が\(\eta/\hat{\eta} > 1\)の場合よりも
+    早く\(\eta/\hat{\eta}=1\)に収束することが確認できます。
+    しかし、\(\eta/\hat{\eta} > 1\)の場合の方が安定して\(\eta/\hat{\eta}=1\)に収束することが窺えます。</p>
 
    <p><a href="https://aoyamakohbo.github.io/Craftlogy/">->TOP</a></p>
 </body>
