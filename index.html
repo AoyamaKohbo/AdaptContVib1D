@@ -66,7 +66,7 @@
   
   <p>強誠実条件：</p>
   \begin{align}
-   c = \frac{2}{25.12} \fallingdotseq 0.08 \label{eq:Set_C}
+   c = \frac{2}{25.12} \fallingdotseq 0.08 > \frac{1}{25.12}\label{eq:Set_C}
   \end{align}
 
   <p>\(\eta=0.5.2.0,3.0\)について\(\eta/\hat\eta\)の動作を<a href="https://aoyamakohbo.github.io/EulerMtd/">オイラー法による逐次数値積分</a> による数値シミュレーションで観察します。</p>
@@ -75,8 +75,8 @@
 \begin{align}
   \left.
     \begin{array}{@{\,}rl}
-       \ddot x(k)&=~ - \eta K_D \dot x(k) - \eta K_P(x(k) - u(k))\\
-       v(k+1)&=~ v(k)+\ddot x(k)\varDelta t\\
+       \ddot x(k)&=~ -\eta K_D \dot x(k) - \eta K_P(x(k) - u(k))\\
+       \dot x(k+1)&=~ \dot x(k)+\ddot x(k)\varDelta t\\
        x(k+1)&=~ x(k) + v(k)\varDelta t + \frac{1}{2}\ddot x(k)\varDelta t^2
     \end{array} \label{eq:Euler}
   \right\}  
