@@ -72,15 +72,15 @@
   <p>\(\eta=0.5.2.0,3.0\)について\(\eta/\hat\eta\)の動作を<a href="https://aoyamakohbo.github.io/EulerMtd/">オイラー法による逐次数値積分</a> による数値シミュレーションで観察します。</p>
   <p>オイラー法の時間刻み\(\varDelta t = 0.0001\)[s]として計算します。</p>
 
-    \begin{align}
-    \ddot x(k) = - \eta K_D \dot x(k) - \eta K_P(x(k) - u(k)) = 0 \label{eq:ddx}
-    \end{align}
-
-    </p>
-    \begin{align}
-     v(k+1) &=~ v(k)+\ddot x(k)\varDelta t\\
-     x(k+1) &=~ x(k) + v(k)\varDelta t + \frac{1}{2}\ddot x(k)\varDelta t^2
-    \end{align}
+\begin{align}
+  \left.
+    \begin{array}{@{\,}rl}
+       \ddot x(k)&=~ - \eta K_D \dot x(k) - \eta K_P(x(k) - u(k))\\
+       v(k+1)&=~ v(k)+\ddot x(k)\varDelta t\\
+       x(k+1)&=~ x(k) + v(k)\varDelta t + \frac{1}{2}\ddot x(k)\varDelta t^2
+    \end{array} \label{eq:Euler}
+  \right\}  
+\end{align}
 
   <p>規範モデル\eqref{eq:MdlEqn}はサンプル時間\(T=0.005\)[s]として、<a href="https://aoyamakohbo.github.io/VscElsVib1D/">離散時間状態方程式</a>
     で計算します。</p>
@@ -117,9 +117,9 @@
        x_M(n)\\
        \dot x_M(n)
       \end{array}
-     \right].
+     \right]. \label{eq:StateEq}
     \end{align} 
-    
+    <p>式\eqref{eq:StateEq}を１回実行する間に式\eqref{eq:Euler}を\(T/\varDelta t=50\)回実行します。</p>
     <p>初期値\(\hat{\eta} = 1\)、\(\alpha = 1.0\times 10^{-5}\)として、
       \(\eta = 2.0\)と\(\eta = 0.5\)の場合について
       規範モデル\(x_M\)に対する適応制御系\(x\)の挙動を数値実験により観察します。</p>
