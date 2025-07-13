@@ -20,6 +20,7 @@
   <body>
     <h3>モデル規範適応制御の数値解析(数値実験)</h3>
 
+    <h3>§モデル規範適応制御の定式化</h3>
     <p><a href="https://aoyamakohbo.github.io/AdaptCont/">超安定論によるモデル規範適応制御</a>
       を数値解析で確認します。
     </p>
@@ -43,8 +44,10 @@
     K_D = \frac{a}{\hat\eta},~~~~K_P = \frac{b}{\hat\eta}. \label{eq:ModEta}
     \end{align}
 
-  <p>ここに、\(\hat\eta\)は駆動効率\(\eta\)の推定値です。
-      式\eqref{eq:ModEta}の\(\hat\eta\)を<a href="https://aoyamakohbo.github.io/AdaptCont/">超安定論によるモデル規範適応制御</a>
+  <p>ここに、\(\hat\eta\)は駆動効率\(\eta\)の推定値です。</p>
+  
+  <h3>§適応制御則</h3>
+  <p>式\eqref{eq:ModEta}の\(\hat\eta\)を<a href="https://aoyamakohbo.github.io/AdaptCont/">超安定論によるモデル規範適応制御</a>
       で導出した適応制御則に従って調整します。
   </p>
 
@@ -69,6 +72,7 @@
    c = \frac{2}{25.12} \fallingdotseq 0.08 > \frac{1}{25.12}\label{eq:Set_C}
   \end{align}
 
+<h3>§数値実験</h3>
   <p>\(\eta=0.5.2.0,3.0\)について\(\eta/\hat\eta\)の動作を<a href="https://aoyamakohbo.github.io/EulerMtd/">オイラー法による逐次数値積分</a> による数値シミュレーションで観察します。</p>
   <p>オイラー法の時間刻み\(\varDelta t = 0.0001\)[s]として計算します。</p>
 
@@ -120,6 +124,18 @@
      \right]. \label{eq:StateEq}
     \end{align} 
     <p>式\eqref{eq:StateEq}を１回実行する間に式\eqref{eq:Euler}を\(T/\varDelta t=50\)回実行します。</p>
+
+    <p>\(\dot{\hat\eta}(n)=(\hat\eta(n)-\hat\eta(n-1))/T\)と近似して適応制御則\eqref{eq:AdaptRule}を次式とします。</p>
+    \begin{align}
+    \left.
+      \begin{array}{@{\,}rl}
+      \hat\eta(n+1)&=~\hat\eta(n)-\alpha T\frac{v_{FB}\varepsilon}{\hat\eta}\\
+      v_{FB}&=-a \dot x - b (x - u)
+      \end{array}
+     \right\}
+    \end{align}
+
+    <h3>§数値実験結果</h3>
     <p>初期値\(\hat{\eta} = 1\)、\(\alpha = 1.0\times 10^{-5}\)として、
       \(\eta = 2.0\)と\(\eta = 0.5\)の場合について
       規範モデル\(x_M\)に対する適応制御系\(x\)の挙動を数値実験により観察します。</p>
