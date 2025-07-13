@@ -74,14 +74,14 @@
 
 <h3>§数値実験</h3>
   <p>\(\eta=0.5.2.0,3.0\)について\(\eta/\hat\eta\)の動作を<a href="https://aoyamakohbo.github.io/EulerMtd/">オイラー法による逐次数値積分</a> による数値シミュレーションで観察します。</p>
-  <p>オイラー法の時間刻み\(\varDelta t = 0.0001\)[s]として計算します。</p>
+  <p>オイラー法の時間刻み\(\varDelta t = 0.0001\)[s]として計算します。\(x_0(n)=x(n)\)として</p>
 
 \begin{align}
   \left.
     \begin{array}{@{\,}rl}
-       \ddot x(k)&=~ -\eta K_D \dot x(k) - \eta K_P(x(k) - u(k))\\
-       \dot x(k+1)&=~ \dot x(k)+\ddot x(k)\varDelta t\\
-       x(k+1)&=~ x(k) + v(k)\varDelta t + \frac{1}{2}\ddot x(k)\varDelta t^2
+       \ddot x_k(n)&=~ -\eta K_D \dot x_k(n) - \eta K_P\{x_k(n) - u(n)\},\\
+       \dot x_{k+1}(n)&=~ \dot x_k(n)+\ddot x_k(n)\varDelta t,\\
+       x_{k+1}(n)&=~ x_k(n) + \dot x_k(n)\varDelta t + \frac{1}{2}\ddot x_k(n)\varDelta t^2.
     \end{array} \label{eq:Euler}
   \right\}  
 \end{align}
@@ -123,17 +123,20 @@
       \end{array}
      \right]. \label{eq:StateEq}
     \end{align} 
-    <p>式\eqref{eq:StateEq}を１回実行する間に式\eqref{eq:Euler}を\(T/\varDelta t=50\)回実行します。</p>
+    <p>式\eqref{eq:StateEq}を１回実行する間に式\eqref{eq:Euler}を\(T/\varDelta t=50\)回(\(k=0\cdots 49\))実行します。</p>
 
     <p>\(\dot{\hat\eta}(n)=(\hat\eta(n)-\hat\eta(n-1))/T\)と近似して適応制御則\eqref{eq:AdaptRule}を次式とします。</p>
     \begin{align}
     \left.
       \begin{array}{@{\,}rl}
-      \hat\eta(n+1)&=~\hat\eta(n)-\alpha T\frac{v_{FB}\varepsilon}{\hat\eta}\\
-      v_{FB}&=-a \dot x - b (x - u)
-      \end{array}
+      \hat\eta(n+1)&=~\hat\eta(n)-\alpha T\frac{v_{FB}(n)\varepsilon(n)}{\hat\eta(n)}\\
+      v_{FB}(n)&=~-a \dot x(n) - b \{x(n) - u(n)\}\\
+      \varepsilon(n) &=~ e(n) + c\dot e(n)\\
+      e(n)&=~ x_M(n) - x(n)
+      \end{array} \label{eq:AdaptRuleDgt}
      \right\}
     \end{align}
+    <p>数値実験では式\eqref{eq:Euler}～\eqref{eq:AdaptRuleDgt}を１ステップとします。</p>
 
     <h3>§数値実験結果</h3>
     <p>初期値\(\hat{\eta} = 1\)、\(\alpha = 1.0\times 10^{-5}\)として、
