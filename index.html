@@ -25,15 +25,10 @@
       を数値解析で確認します。</p>
 
     \begin{align}
-    \ddot x + \eta K_D \dot x + \eta K_P(x - u) = 0 \label{eq:SysEqn}
+    \ddot x + a\frac{\eta}{\hat\eta} \dot x + b\frac{\eta}{\hat\eta}(x - u) = 0 \label{eq:SysEqn}
     \end{align}
-    <p> ここに、\(x\)は位置、\(K_D\)は微分ゲイン、\(K_P\)は比例ゲイン、\(u\)は位置入力、\(\eta(>0)\)は駆動効率係数です。</p> 
-    
-    <p>微分ゲイン\(K_D\)と比例ゲイン\(K_P\)を次式で調整します。</p>
-    \begin{align}
-      K_D = \frac{a}{\hat\eta},~~~~K_P = \frac{b}{\hat\eta}. \label{eq:ModEta}
-    \end{align}
-    <p>ここに、\(\hat\eta\)は駆動効率\(\eta\)の推定値です。</p>
+    <p> ここに、\(x\)は位置、\(u\)は位置入力、
+      \(\eta(>0)\)は駆動効率係数、\(\hat\eta\)は駆動効率\(\eta\)の推定値です。</p>
 
     <p>目的とする制御性能を規範モデルとして次式で与えます。</p>
     \begin{align}
@@ -43,7 +38,7 @@
     <p> ここに、\(x_M\)は規範モデルの位置です。\(a=25.12\)、\(b=3943\)とします。</p>
 
   <h3>§適応制御則</h3>
-  <p>式\eqref{eq:SysEqn}の\(\hat\eta\)を<a href="https://aoyamakohbo.github.io/AdaptCont/">超安定論によるモデル規範適応制御</a>
+  <p>適応制御対象\eqref{eq:SysEqn}の\(\hat\eta\)を<a href="https://aoyamakohbo.github.io/AdaptCont/">超安定論によるモデル規範適応制御</a>
       で導出した適応制御則に従って調整します。
   </p>
 
@@ -58,7 +53,7 @@
   <p>強正実条件を満たすように\(c=2/25.12\)とします。</p>
 
 <h3>§数値実験</h3>
-  <p>\(\eta/\hat\eta\)の動作を<a href="https://aoyamakohbo.github.io/EulerMtd/">オイラー法による逐次数値積分</a> による数値シミュレーションで観察します。</p>
+  <p>適応制御対象\eqref{eq:SysEqn}を<a href="https://aoyamakohbo.github.io/EulerMtd/">オイラー法による逐次数値積分</a> による数値シミュレーションで観察します。</p>
   <p>オイラー法の時間刻み\(\varDelta t = 0.0001\)[s]として計算します。\(x_0(n)=x(n)\)として</p>
 
 \begin{align}
@@ -101,7 +96,7 @@
       \end{array}
     \right]u(n) \label{eq:StateEq}
     \end{align} 
-    <p>規範モデルの離散時間状態方程式\eqref{eq:StateEq}を１回実行する間にオイラー法\eqref{eq:Euler}を\(T/\varDelta t=50\)回(\(k=0\cdots 49\))実行します。</p>
+    <p>規範モデル\eqref{eq:MdlEqn}の離散時間状態方程式\eqref{eq:StateEq}を１回実行する間にオイラー法\eqref{eq:Euler}を\(T/\varDelta t=50\)回(\(k=0\cdots 49\))実行します。</p>
 
     <p>\(\dot{\hat\eta}(n)=\{\hat\eta(n)-\hat\eta(n-1)\}/T\)と近似して適応制御則\eqref{eq:AdaptRule}を次式とします。</p>
     \begin{align}
@@ -141,7 +136,11 @@
     早く\(\eta/\hat{\eta}=1\)に収束することが確認できます。
     しかし、\(\eta/\hat{\eta} > 1\)の場合の方が安定して\(\eta/\hat{\eta}=1\)に収束することが窺えます。</p>
 
+   <p><a href="https://aoyamakohbo.github.io/AdaptContVib1D_A/">モデル規範適応制御の数値解析(適応制御則の動作メカニズム)</a>
+    について確認します。</p>
+
    <p><a href="https://aoyamakohbo.github.io/Craftlogy/">->TOP</a></p>
+
 </body>
 
 </html>
