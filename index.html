@@ -59,7 +59,7 @@
 \begin{align}
   \left.
     \begin{array}{@{\,}rl}
-       \ddot x_k(n)&=~ -\eta K_D \dot x_k(n) - \eta K_P\{x_k(n) - u(n)\},\\
+       \ddot x_k(n)&=~ -a\frac{\eta}{\hat\eta} \dot x_k(n) - b\frac{\eta}{\hat\eta}\{x_k(n) - u(n)\},\\
        \dot x_{k+1}(n)&=~ \dot x_k(n)+\ddot x_k(n)\varDelta t,\\
        x_{k+1}(n)&=~ x_k(n) + \dot x_k(n)\varDelta t + \frac{1}{2}\ddot x_k(n)\varDelta t^2.
     \end{array} \label{eq:Euler}
@@ -112,7 +112,7 @@
     <p>数値実験では式\eqref{eq:Euler}～\eqref{eq:AdaptRuleDgt}を１ステップとします。</p>
 
     <h3>§数値実験結果</h3>
-    <p>初期値\(\hat{\eta} = 1\)、\(\alpha = 1.0\times 10^{-5}\)として、
+    <p>初期値\(\hat{\eta} = 1\)、\(\alpha = 1.0\times 10^{-2}\)として、
       \(\eta = 2.0\)と\(\eta = 0.5\)の場合について
       規範モデル\(x_M\)に対する適応制御系\(x\)の挙動を数値実験により観察します。</p>
     <img src="AdaptCont_x_xM.jpg" width=600px>
