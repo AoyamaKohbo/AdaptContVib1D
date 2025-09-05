@@ -59,7 +59,7 @@
 \begin{align}
   \left.
     \begin{array}{@{\,}rl}
-       \ddot x_k(n)&=~ -a\frac{\eta}{\hat\eta} \dot x_k(n) - b\frac{\eta}{\hat\eta}\{x_k(n) - u(n)\},\\
+       \ddot x_k(n)&=~ -a\displaystyle\frac{\eta}{\hat\eta} \dot x_k(n) - b\displaystyle\frac{\eta}{\hat\eta}\{x_k(n) - u(n)\},\\
        \dot x_{k+1}(n)&=~ \dot x_k(n)+\ddot x_k(n)\varDelta t,\\
        x_{k+1}(n)&=~ x_k(n) + \dot x_k(n)\varDelta t + \frac{1}{2}\ddot x_k(n)\varDelta t^2.
     \end{array} \label{eq:Euler}
@@ -102,7 +102,7 @@
     \begin{align}
     \left.
       \begin{array}{@{\,}rl}
-      \hat\eta(n+1)&=~\hat\eta(n)-\alpha T\frac{v_{FB}(n)\varepsilon(n)}{\hat\eta(n)}\\
+      \hat\eta(n+1)&=~\hat\eta(n)-\alpha T\displaystyle\frac{v_{FB}(n)\varepsilon(n)}{\hat\eta(n)}\\
       v_{FB}(n)&=~-a \dot x(n) - b \{x(n) - u(n)\}\\
       \varepsilon(n) &=~ e(n) + c\dot e(n)\\
       e(n)&=~ x_M(n) - x(n)
